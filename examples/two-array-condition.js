@@ -9,7 +9,7 @@ const rel = new Relations(
   {
     keys: {
       left: 'name',
-      right: 'author',
+      right: 'author'
     },
     transform: rec => {
       if (rec[1].date) {
