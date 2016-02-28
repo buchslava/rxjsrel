@@ -23,7 +23,7 @@ const rel = new Relations(
 
 rel
   .join({
-    condition: rec => rec.language === 'German',
+    condition: rec => rec.language === 'German'
   })
   .toArray()
   .subscribe(x => console.log(x));
