@@ -3,6 +3,12 @@
 const Relations = require('../lib').Relations;
 const data = require('./data/big-stub-store');
 
+let namesArr = [];
+for (let i = 0; i < 10; i++) {
+  namesArr.push(`book ${i}`);
+}
+let authorArr = ['author #20', 'author #2000'];
+
 const rel = new Relations(
   data.authors,
   data.books,
@@ -15,18 +21,11 @@ const rel = new Relations(
   }
 );
 
-let namesArr = [];
-for (let i = 0; i < 10; i++) {
-  namesArr.push(`book ${i}`);
-}
-
-let authorArr = ['author #20', 'author #2000'];
-
 console.log(new Date());
 rel
-  /*.join({
+  .join({
     condition: rec => namesArr.indexOf(rec.title) >= 0 && authorArr.indexOf(rec.name) >= 0
-  })*/
+  })
   .join()
   .toArray()
   .subscribe(x => {
