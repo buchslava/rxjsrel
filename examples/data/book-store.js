@@ -133,3 +133,20 @@ exports.books = [
     date: 'September 13, 2011'
   }
 ];
+exports.comments = [
+  {
+    name: 'foo',
+    book: 'Maxims and Reflections',
+    comment: `it's very interesting book, really`
+  },
+  {
+    name: 'foo',
+    book: 'Faust: A Tragedy (Norton Critical Editions) Second Edition Edition',
+    comment: `cool!`
+  },
+  {
+    name: 'bar',
+    book: 'Socks',
+    comment: `I like 'Paperback' format`
+  }
+];

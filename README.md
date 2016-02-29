@@ -4,21 +4,23 @@
 
 [npm version](https://www.npmjs.com/package/rxjsrel)
 
-# Install
+## Install
 
 `npm i rxjsrel`
 
-# Usage
+## Usage
 
 ```javascript
 const RxJSRel = require('rxjsrel');
 const Relations = RxJSRel.Relations
 ```
 
-# Examples
+## Examples
 
-## Note!
+### Note!
 You can get sets of data for examples here: [book-store](https://raw.githubusercontent.com/buchslava/rxjsrel/master/examples/data/book-store.js), [big-stub-store](https://raw.githubusercontent.com/buchslava/rxjsrel/master/examples/data/big-stub-store.js).
+
+Information about authors and books was taken from [www.famousauthors.org](http://www.famousauthors.org/)
 
 ### Merge two tables by key
 
@@ -159,3 +161,66 @@ rel
   .subscribe(x => console.log(x));
 ```
 
+### Multi join: 3 arrays
+
+```javascript
+'use strict';
+
+const Relations = require('rxjsrel').Relations;
+const data = require('./book-store');
+
+const booksStore$ = new Relations(
+  data.authors,
+  data.books,
+  {
+    keys: {
+      left: 'name',
+      right: 'author'
+    },
+    transform: Relations.getDefaultTransformer()
+  }
+).join();
+
+new Relations(
+  booksStore$,
+  data.comments,
+  {
+    keys: {
+      left: 'title',
+      right: 'book'
+    },
+    transform: Relations.getDefaultTransformer()
+  }
+).join().subscribe(x => console.log(x));
+```
+
+Result is:
+```
+{ name: 'bar',
+  born: 'April 12, 1916',
+  description: 'American writer of fiction for children and young adults.',
+  author: 'Beverly Cleary',
+  title: 'Socks',
+  type: [ 'Paperback' ],
+  date: 'April 14, 2015',
+  book: 'Socks',
+  comment: 'I like \'Paperback\' format' }
+{ name: 'foo',
+  born: '28 August 1749',
+  die: '22 March 1832',
+  description: 'German writer and statesman',
+  author: 'Johann Wolfgang Von Goethe',
+  title: 'Faust: A Tragedy (Norton Critical Editions) Second Edition Edition',
+  book: 'Faust: A Tragedy (Norton Critical Editions) Second Edition Edition',
+  comment: 'cool!' }
+{ name: 'foo',
+  born: '28 August 1749',
+  die: '22 March 1832',
+  description: 'German writer and statesman',
+  author: 'Johann Wolfgang Von Goethe',
+  title: 'Maxims and Reflections',
+  type: [ 'Paperback' ],
+  date: 'September 13, 2011',
+  book: 'Maxims and Reflections',
+  comment: 'it\'s very interesting book, really' }
+```
