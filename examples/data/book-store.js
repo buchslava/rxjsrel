@@ -15,7 +15,7 @@ exports.authors = [
     name: 'Franz Kafka',
     born: '3 July 1883',
     die: '3 June 1924',
-    description: ' German-language writer of novels and short stories who is widely regarded as one of the major figures of 20th-century literature'
+    description: 'German-language writer of novels and short stories who is widely regarded as one of the major figures of 20th-century literature'
   },
   {
     name: 'Johann Wolfgang Von Goethe',
